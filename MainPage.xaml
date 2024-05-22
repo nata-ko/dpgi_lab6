@@ -1,0 +1,65 @@
+﻿<Page x:Class="lab6.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:lab6"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MainPage">
+
+    <Page.Resources>
+        <Style TargetType="Label">
+            <Setter Property="Margin" Value="0 40 0 0"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="Hyperlink">
+            <Setter Property="Foreground" Value="MediumPurple"/>
+            <Setter Property="TextDecorations" Value="None"/>
+            <Setter Property="FontSize" Value="18"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Margin" Value="0 80 20 0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter Margin="2"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            RecognizesAccessKey="True" />
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="CornflowerBlue"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid.Background>
+            <SolidColorBrush Color="#2e333b"></SolidColorBrush>
+        </Grid.Background>
+        <Label Foreground="White"  FontWeight="Bold">Welcome!</Label>
+        <TextBlock>
+            <Button>
+                <Hyperlink NavigateUri="ConvertPage.xaml">Convert</Hyperlink>
+            </Button>
+            <Button>
+                <Hyperlink NavigateUri="HistoryPage.xaml" > History</Hyperlink>
+            </Button>
+            
+        </TextBlock>
+        
+    </Grid>
+</Page>

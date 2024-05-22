@@ -1,0 +1,104 @@
+﻿<Page x:Class="lab6.HistoryPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:lab6"
+      xmlns:command="clr-namespace:lab6.Commands"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="HistoryPage">
+
+    <Page.CommandBindings>
+        <CommandBinding Command="{x:Static command:DataCommands.LoadFullHistory}" Executed="LoadFullHistoryCommandBinding_Executed" CanExecute="LoadFullHistoryCommandBinding_CanExecute" />
+        <CommandBinding Command="{x:Static command:DataCommands.FilterHistoryByCurrency}" Executed="FilterHistoryByCurrencyCommandBinding_Executed" CanExecute="FilterHistoryByCurrencyCommandBinding_CanExecute" />
+        <CommandBinding Command="{x:Static command:DataCommands.FilterHistoryByDate}" Executed="FilterHistoryByDateCommandBinding_Executed" CanExecute="FilterHistoryByDateCommandBinding_CanExecute" />
+        
+    </Page.CommandBindings>
+    <Page.Resources>
+        <Style TargetType="MenuItem">
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="10" Height="70" Background="#FF5A7CE3" Name="border" BorderThickness="1" BorderBrush="#FF5A7CE3" >
+                            <ContentPresenter x:Name="content" HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True" ContentSource="Content"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="False">
+                                <Setter Property="Foreground" Value="white"/>
+                            </Trigger>
+                            
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+  
+    <Grid>
+        <Label HorizontalAlignment="Center" FontSize="25" Content="History"/>
+        <Menu Margin="0 40 0 0">
+            <MenuItem Header="Full history" Command="{x:Static command:DataCommands.LoadFullHistory}"/>
+            <Separator/>
+            <MenuItem Header="Filter by date">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <DatePicker Grid.Column="0" FontSize="18"  Grid.Row="0" Width="140" Name="datePicker" HorizontalAlignment="Left"/>
+                    <Button Grid.Column="1" Command="{x:Static command:DataCommands.FilterHistoryByDate}"  x:Name="dateFilter" Width="150" Height="70" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="160 4 0 0" >Filter</Button>
+                </Grid>
+                
+            </MenuItem>
+            <Separator/>
+            <MenuItem Header="Filter by currency">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <Label Grid.Row="0" Grid.ColumnSpan="2" Content="Intial value" FontSize="18" HorizontalAlignment="Center"  Margin="10 0 0 0"/>
+                    <ComboBox Name="currenciesForFilter" Grid.Row="1" Grid.Column="0" Width="100" Height="50" HorizontalAlignment="Left" Margin="10 40 0 0"  VerticalAlignment="Top"/>
+                    <Button Grid.Row="1" Grid.Column="1" Command="{x:Static command:DataCommands.FilterHistoryByCurrency}" Width="140" Height="70" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="200 15 0 0" Content="Filter" />
+                </Grid>
+
+                
+            </MenuItem>
+        </Menu>
+        <DataGrid Margin="0 70 0 0" Name="historyTable" RowBackground="White" AlternatingRowBackground="#FFA8B7E5" FontSize="15">
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="Padding" Value="5 2 5 2"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                </Style>
+            </DataGrid.CellStyle>
+
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="#FF5A7CE3"/>
+                    <Setter Property="BorderBrush" Value="Gray"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="Padding" Value="5 2 5 2"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+
+        </DataGrid>
+
+
+    </Grid>
+</Page>
